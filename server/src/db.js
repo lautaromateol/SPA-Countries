@@ -44,7 +44,7 @@ const loadCountries = async()=>{
       await Country.create({
       id: cca3,
       name: name.common,
-      flagImage: flags.png,
+      flagImage: flags.svg,
       continents: continents ? continents[0] : null,
       capital: capital ? capital[0] : null,
       subregion: subregion ? subregion : null,
