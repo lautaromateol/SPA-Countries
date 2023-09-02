@@ -8,19 +8,16 @@ return async(dispatch)=>{
         type: 'GET_COUNTRIES',
         payload: data
     })
-}
-}
+}}
 
 export const orderCountries = (order)=>{
         return {
             type: 'ORDER',
             payload: order
-        }
-    }
+        }}
 
 export const filterCountries = (continent)=>{
-        return{
-            type: 'FILTER',
-            payload: continent
-        }
-}
+    return {
+        type: 'FILTER',
+        payload: continent
+    }}

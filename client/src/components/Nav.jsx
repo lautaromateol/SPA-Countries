@@ -7,10 +7,10 @@ return(
 <button>Home</button>
 </Link>
 <Link to='/'>
-<button>Informacion</button>
+<button>Info</button>
 </Link>
-<Link>
-<button>Crear actividad</button>
+<Link to='/activity'>
+<button>Add activity</button>
 </Link>
 </div>
 )}
