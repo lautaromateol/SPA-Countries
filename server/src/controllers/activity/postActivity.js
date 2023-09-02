@@ -4,15 +4,15 @@ module.exports = async(req, res)=>{
 
     try {
 
-        const {name, dificulty, duration, season, country} = req.body
+        const {name, difficulty, duration, season, country} = req.body
 
-        if(!name || !dificulty || !season || !country) return res.status(400).send('Falta informacion')
+        if(!name || !difficulty || !season || !country) return res.status(400).send('Falta informacion')
 
-        if(dificulty < 1 || dificulty > 5) return res.status(400).send('La dificultad debe estar entre 1 y 5')
+        if(difficulty < 1 || difficulty > 5) return res.status(400).send('La dificultad debe estar entre 1 y 5')
 
-        if(!['Otoño', 'Invierno', 'Primavera', 'Verano'].includes(season)) return res.status(400).send('Proporciona una estacion valida')
+        if(!['Autumn', 'Winter', 'Spring', 'Summer'].includes(season)) return res.status(400).send('Proporciona una estacion valida')
         
-        let activity = await Activity.findOne({where : {name, dificulty, duration, season}})
+        let activity = await Activity.findOne({where : {name, difficulty, duration, season}})
 
         let newCountry = await Country.findOne({where: {name: country}})
 
@@ -21,7 +21,7 @@ module.exports = async(req, res)=>{
             return res.status(200).send('¡Actividad creada con exito!')
         }
 
-        activity = await Activity.create({name, dificulty, duration, season})
+        activity = await Activity.create({name, difficulty, duration, season})
         await activity.addCountry(newCountry)
 
         res.status(200).send('¡Actividad creada con exito!')
