@@ -1,5 +1,5 @@
 const initialState = {
-    countries: []
+    countries: [],
 }
 
 const reducer = (state = initialState, action)=>{
@@ -19,6 +19,17 @@ switch (action.type) {
        
         if(action.payload === '-') return {...state, countries: state.countries.sort((a, b)=> a.population - b.population)}
 
+        if(action.payload === 'A-Z') return {...state, countries: [...state.countries].sort((a , b)=> a.name >b.name ? 1 : -1)}
+
+        if(action.payload === 'Z-A') return {...state, countries: [...state.countries].sort((a , b)=> a.name <b.name ? 1 : -1)}
+        
+        return 
+
+    case 'SEARCH':
+        return {
+            ...state,
+            countries :  [...state.countries].filter(({name})=> name.toLowerCase().includes(action.payload))
+        }
     default: 
     return state
 }

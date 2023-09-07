@@ -1,10 +1,12 @@
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react'
-import {getCountries, filterCountries, orderCountries} from '../../redux/actions'
+import {getCountries, filterCountries, orderCountries, searchCountries} from '../../redux/actions'
 import Card from "../Card/Card";
-import './Home.css'
+import style from './Home.module.css'
 
-const Home = ({orderCountries, filterCountries, getCountries})=>{
+const Home = ()=>{
+
+    const dispatch = useDispatch()
 
     const countries = useSelector(state => state.countries)
 
@@ -15,6 +17,8 @@ const Home = ({orderCountries, filterCountries, getCountries})=>{
     const [order, setOrder] = useState('')
 
     const [aux, setAux] = useState(false)
+
+    const [data, setData] = useState('')
     
     const next = ()=>{
         let nextPg = page + 1
@@ -33,26 +37,34 @@ const Home = ({orderCountries, filterCountries, getCountries})=>{
     }
     
     const handleOrder = (event)=>{
-        if(event.target.value === '--Population--') return
         setOrder(event.target.value)
-        orderCountries(event.target.value)
+        dispatch(orderCountries(event.target.value))
         setPage(0)
         setAux(!aux)
     }
 
     const handleFilter = async(event)=>{
-        if(event.target.value === '--Continent--') return
-        await getCountries()
-        orderCountries(order)
-        filterCountries(event.target.value)
+        await dispatch(getCountries())
+        if(order !== '') dispatch(orderCountries(order))
+        dispatch(filterCountries(event.target.value))
         setPage(0)
         setAux(!aux)
     }
 
     const handleReset = async()=>{
-        await getCountries()
+        await dispatch(getCountries())
         setPage(0)
         setAux(!aux)
+    }
+
+    const handleChange = async(event)=>{
+        setData(event.target.value)
+    }
+    
+    const handleSubmit = async(event)=>{
+        await dispatch(getCountries())
+        dispatch(searchCountries(data))
+        setAux(!aux) 
     }
 
     useEffect(()=>{
@@ -60,20 +72,21 @@ const Home = ({orderCountries, filterCountries, getCountries})=>{
     }, [aux])
 
     return(
-        <div>
-            <button onClick={handleReset}>Reset filters</button>
-            <button onClick={prev}>{'<'}</button>
-            <p id='pageNum'>{`${page + 1}`}</p>
-            <button onClick={next}>{'>'}</button>
-            <select onChange={handleOrder}>
-                <option>--Population--</option>
+        <div id={style.contenedor}>
+            <div id={style.botones}>
+            <button class={style.boton} onClick={handleReset}>Reset filters</button>
+            <button class={style.boton} onClick={prev}>{'<'}</button>
+            <p id={style.pageNum}>{`${page + 1}`}</p>
+            <button class={style.boton} onClick={next}>{'>'}</button>
+            <select class={style.filtro} onChange={handleOrder}>
+                <option hidden>--Population--</option>
                 <option value='+'>More population</option>
                 <option value='-'>Less population</option>
-                {/* <option value='A-Z'>A-Z</option>
-                <option value='Z-A'>Z-A</option> */}
+                <option value='A-Z'>A-Z</option>
+                <option value='Z-A'>Z-A</option>
             </select>
-            <select onChange={handleFilter}>
-                <option>--Continent--</option>
+            <select class={style.filtro} onChange={handleFilter}>
+                <option hidden>--Continent--</option>
                 <option value='South America'>South America</option>
                 <option value='North America'>North America</option>
                 <option value='Europe'>Europe</option>
@@ -82,6 +95,9 @@ const Home = ({orderCountries, filterCountries, getCountries})=>{
                 <option value='Oceania'>Oceania</option>
                 <option value='Antarctica'>Antarctica</option>
             </select>
+            <input id={style.searchbar} onChange={handleChange} type="searchbar" placeholder="Search..."></input>
+            <button id={style.lupa} onClick={handleSubmit}>🔍︎</button>
+            </div>
             {items.map((country)=>{
                 return(
                 <Card
@@ -96,12 +112,4 @@ const Home = ({orderCountries, filterCountries, getCountries})=>{
     )
 }
 
-const mapDispatchToProps = (dispatch)=>{
-    return{
-        orderCountries: (order) => dispatch(orderCountries(order)),
-        filterCountries: (continent) => dispatch(filterCountries(continent)),
-        getCountries: ()=> dispatch(getCountries())
-    }
-}
-
-export default connect(null, mapDispatchToProps)(Home)
+export default Home

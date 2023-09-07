@@ -1,0 +1,37 @@
+#pageNum{
+  display: inline;
+}
+
+.botones{
+  display: block;
+}
+#contenedor{
+  text-align: center;
+  margin: 0 auto;
+}
+.boton, .filtro {
+  background: #052577;
+  color: rgb(255, 255, 255);
+  font-family: 'Lexend';
+  padding: 0.4em 1em;
+  margin: 10px 20px;
+  font-weight: 900;
+  font-size: 16px;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  }
+.boton:hover {
+  transform: translate(-0.05em, -0.05em);
+  }
+.boton:active {
+  transform: translate(0.05em, 0.05em);
+  }
+#lupa{
+  background-color: #052577;
+  color: white;
+}
+#searchbar{
+border: 3px solid black;
+  }
+
+

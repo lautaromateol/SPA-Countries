@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -39,7 +39,8 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 6px;
+  margin: 2px;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -58,12 +59,18 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: aqua;
   }
   a:hover {
     color: #747bff;
   }
   button {
     background-color: #f9f9f9;
+  }
+} */
+
+@media (prefers-color-scheme: light) {
+  :root {
+    background-color: rgb(66, 123, 152);
   }
 }

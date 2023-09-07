@@ -1,0 +1,55 @@
+.contenedor{
+  margin: 0 auto;
+  font-family: 'Lexend';
+  color: white;
+  text-align: center;
+}
+#countries_selected{
+    display: inline-flex
+}
+#input{
+  display: block;
+}
+select, input{
+  margin: 5px 15px;
+  background-color: #052577;
+  color: white;
+  font-family: 'Lexend';
+}
+#submit{
+  display: block;
+  background: #052577;
+  color: rgb(255, 255, 255);
+  font-family: 'Lexend';
+  padding: 0.4em 1em;
+  margin: 10px auto;
+  font-weight: 900;
+  font-size: 16px;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  }
+#sumbit:hover {
+  transform: translate(-0.05em, -0.05em);
+  }
+#submit:active {
+  transform: translate(0.05em, 0.05em);
+  }
+#country{
+  display: block;
+  margin: 10px auto;
+  color: white;
+  background-color: #052577;
+  border: 3px solid black;
+  border-radius: 10px;
+}
+#delete{
+  background-color: red;
+  margin: 8px;
+  height: 2em;
+  border: 2px solid white;
+  border-radius: 20px;
+}
+
+#delete:hover{
+  background-color: rgb(192, 33, 33);
+}

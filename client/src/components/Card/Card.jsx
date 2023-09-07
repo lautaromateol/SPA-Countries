@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import './Card.css'
+import style from './Card.module.css'
 
 const Card = ({id, name, flagImage, continents})=>{
 return(
-    <div id='card'>
+        <div id={style.card}>
         <Link to={`/detail/${id}`}>
-        <h3>Name: {name}</h3>
+        <h3>{name}</h3>
         </Link>
-        <img src={flagImage} alt={name} width='300px' height='200px'/>
+        <img src={flagImage} alt={name} width='200px' height='100px'/>
         <p>Continent: {continents}</p>
-    </div>
+       </div>
 )
 }
 

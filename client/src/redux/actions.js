@@ -21,3 +21,11 @@ export const filterCountries = (continent)=>{
         type: 'FILTER',
         payload: continent
     }}
+
+
+export const searchCountries = (country)=>{
+    return {
+        type: 'SEARCH',
+        payload: country
+    }
+}

@@ -1,0 +1,18 @@
+#card{
+    display: inline-block;
+    border: 6px solid black;
+    background-color: #052577;
+    margin: 30px;
+    width: 225px;
+    height: 250px;
+    transition: 0.5;
+}
+#card:hover{
+    transform: scale(1.2);
+}
+h3, p{
+    color: white;
+    font-family: 'Lexend';
+}
+
+
