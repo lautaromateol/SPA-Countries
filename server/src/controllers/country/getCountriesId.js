@@ -6,12 +6,19 @@ module.exports = async(req, res) =>{
         
         const {countryId} = req.params
         
-        let {dataValues} = await Country.findOne({where: {
+        let country = await Country.findOne({where: {
             id: {
-                [Op.iLike]: countryId}}, include: Activity
+                [Op.iLike]: countryId}}, attributes: {
+                    exclude: ['updatedAt', 'createdAt'],
+                },
+                include: {
+                    model: Activity,
+                    through: {
+                        attributes: []
+                    }}
             })
         
-        res.status(200).json(dataValues)
+        res.status(200).json(country)
         
     } catch (error) {
         
@@ -19,3 +26,5 @@ module.exports = async(req, res) =>{
     
     }
 }
+
+

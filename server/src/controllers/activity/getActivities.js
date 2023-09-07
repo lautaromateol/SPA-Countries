@@ -1,9 +1,16 @@
-const {Activity} = require('../../db')
+const {Activity, Country} = require('../../db')
 
 module.exports = async(req, res)=>{
     try {
         
-        let allActivities = await Activity.findAll()
+        let allActivities = await Activity.findAll({attributes: {
+            exclude: ['updatedAt', 'createdAt'],
+        },
+        include: {
+            model: Country,
+            through: {
+                attributes: []
+            }}})
 
         res.status(200).json(allActivities)
 
