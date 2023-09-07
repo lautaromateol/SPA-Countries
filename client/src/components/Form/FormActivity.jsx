@@ -61,7 +61,7 @@ setData({
 })
 }
 
-const difficulty = [1, 2, 3, 4, 5]
+const difficulty = [1 + ' (Very easy)', 2 + ' (Easy)', 3 + ' (Medium)', 4 + ' (Hard)', 5 + ' (Very hard)']
 
 const duration = []
 
@@ -78,6 +78,7 @@ dispatch(getCountries())
 
 return(
     <div class={style.contenedor}>
+        <h1>¡Crea una actividad!</h1>
         <form onSubmit={handleSubmit}>
             <div class={style.input}>
             <label>Name</label>
