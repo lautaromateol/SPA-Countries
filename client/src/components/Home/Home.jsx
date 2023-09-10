@@ -14,8 +14,6 @@ const Home = ()=>{
     
     const [page, setPage] = useState(0)
 
-    const [order, setOrder] = useState('')
-
     const [aux, setAux] = useState(false)
 
     const [data, setData] = useState('')
@@ -37,39 +35,32 @@ const Home = ()=>{
     }
     
     const handleOrder = (event)=>{
-        setOrder(event.target.value)
         dispatch(orderCountries(event.target.value))
         setPage(0)
         setAux(!aux)
     }
 
-    const handleFilter = async(event)=>{
-        await dispatch(getCountries())
-        if(order !== '') dispatch(orderCountries(order))
+    const handleFilter = (event)=>{
         dispatch(filterCountries(event.target.value))
         setPage(0)
-        setAux(!aux)
     }
 
     const handleReset = async()=>{
         await dispatch(getCountries())
         setPage(0)
-        setAux(!aux)
     }
 
-    const handleChange = async(event)=>{
+    const handleChange = (event)=>{
         setData(event.target.value)
     }
     
-    const handleSubmit = async(event)=>{
-        await dispatch(getCountries())
+    const handleSubmit = ()=>{
         dispatch(searchCountries(data))
-        setAux(!aux) 
     }
 
     useEffect(()=>{
         setItems([...countries].splice(0, 10))
-    }, [aux])
+    }, [countries, aux])
 
     return(
         <div id={style.contenedor}>
