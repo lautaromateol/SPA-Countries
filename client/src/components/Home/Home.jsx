@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react'
-import {getCountries, filterCountries, orderCountries, searchCountries} from '../../redux/actions'
+import {getCountries, filterCountries, orderCountries, searchCountries, findCountries} from '../../redux/actions'
 import Card from "../Card/Card";
 import style from './Home.module.css'
 
@@ -9,6 +9,8 @@ const Home = ()=>{
     const dispatch = useDispatch()
 
     const countries = useSelector(state => state.countries)
+
+    const activities = useSelector(state => state.activities)
 
     const [items, setItems] = useState([...countries].splice(0, 10))
     
@@ -45,6 +47,12 @@ const Home = ()=>{
         setPage(0)
     }
 
+    const handleActivity = (event)=>{
+        const {Countries} = activities.find(act => act.name === event.target.value)
+        const countriesArr = Countries.map((country) => country.name)
+        dispatch(findCountries(countriesArr))
+    }
+
     const handleReset = async()=>{
         await dispatch(getCountries())
         setPage(0)
@@ -57,6 +65,7 @@ const Home = ()=>{
     const handleSubmit = ()=>{
         dispatch(searchCountries(data))
     }
+
 
     useEffect(()=>{
         setItems([...countries].splice(0, 10))
@@ -85,6 +94,10 @@ const Home = ()=>{
                 <option value='Africa'>Africa</option>
                 <option value='Oceania'>Oceania</option>
                 <option value='Antarctica'>Antarctica</option>
+            </select>
+            <select class={style.filtro} onChange={handleActivity}>
+                <option hidden>--Activities--</option>
+                {activities.map((act)=> <option value={act.name}>{act.name}</option>)}
             </select>
             <input id={style.searchbar} onChange={handleChange} type="searchbar" placeholder="Search..."></input>
             <button id={style.lupa} onClick={handleSubmit}>🔍︎</button>

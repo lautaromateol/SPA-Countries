@@ -29,3 +29,21 @@ export const searchCountries = (country)=>{
         payload: country
     }
 }
+
+export const getActivities = ()=>{
+    const endpoint = 'http://localhost:3001/activities'
+    return async(dispatch)=>{
+        const {data} = await axios.get(endpoint)
+        return dispatch({
+            type:'GET_ACTIVITIES',
+            payload: data
+        })
+    }
+}
+
+export const findCountries = (countries)=>{
+    return {
+        type: 'FIND_COUNTRIES',
+        payload: countries
+    }
+}

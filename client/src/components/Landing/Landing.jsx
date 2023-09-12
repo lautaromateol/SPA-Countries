@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { getCountries } from "../../redux/actions"
+import { getCountries, getActivities } from "../../redux/actions"
 import { useDispatch } from "react-redux"
 import style from './Landing.module.css'
 
@@ -10,6 +10,7 @@ const Landing = ()=>{
 
     useEffect(()=>{
         dispatch(getCountries())
+        dispatch(getActivities())
     })
 
 return(

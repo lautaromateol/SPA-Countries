@@ -1,6 +1,7 @@
 const initialState = {
     countries: [],
-    backup: []
+    backup: [],
+    activities: []
 }
 
 const reducer = (state = initialState, action)=>{
@@ -47,6 +48,19 @@ switch (action.type) {
             ...state,
             countries :  state.backup.filter(({name})=> name.toLowerCase().includes(action.payload))
         }
+    
+    case 'GET_ACTIVITIES': 
+        return {
+            ...state,
+            activities: action.payload
+        }
+
+    case 'FIND_COUNTRIES':
+        return {
+            ...state,
+            countries: state.backup.filter(({name})=> action.payload.includes(name))
+        }
+        
     default: 
     return state
 }
