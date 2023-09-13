@@ -61,7 +61,7 @@ setData({
 })
 }
 
-const difficulty = [1 + ' (Very easy)', 2 + ' (Easy)', 3 + ' (Medium)', 4 + ' (Hard)', 5 + ' (Very hard)']
+const difficulty = [1, 2, 3, 4, 5]
 
 const duration = []
 
