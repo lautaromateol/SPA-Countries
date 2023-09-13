@@ -11,7 +11,7 @@ module.exports = async(req, res)=>{
 
         if(!['Autumn', 'Winter', 'Spring', 'Summer'].includes(season)) return res.status(400).send('Proporciona una estacion valida')
         
-        let activity = await Activity.findOne({where : {name}})
+        let activity = await Activity.findOne({where : {name, difficulty, duration, season}})
         
         if(activity){ 
             countries.forEach(async(el) => {
