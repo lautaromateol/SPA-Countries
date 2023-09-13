@@ -7,10 +7,6 @@ module.exports = async(req, res)=>{
 
         if(!name || !difficulty || !season || !countries) return res.status(400).send('Falta informacion')
 
-        if(difficulty < 1 || difficulty > 5) return res.status(400).send('La dificultad debe estar entre 1 y 5')
-
-        if(!['Autumn', 'Winter', 'Spring', 'Summer'].includes(season)) return res.status(400).send('Proporciona una estacion valida')
-        
         let activity = await Activity.findOne({where : {name, difficulty, duration, season}})
         
         if(activity){ 
@@ -21,7 +17,12 @@ module.exports = async(req, res)=>{
             return res.status(200).send(activity)
         }
         
+        let find = await Activity.findOne({where: {name}})
+        
+        if(find) return res.status(400).send('Esta actividad ya existe')
+        
         activity = await Activity.create({name, difficulty, duration, season})
+        
         countries.forEach(async(el) => {
             let country = await Country.findOne({where: {name: el}})
             await activity.addCountry(country)})

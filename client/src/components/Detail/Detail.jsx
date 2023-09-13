@@ -29,7 +29,7 @@ const Detail = ()=>{
             const {data} = await axios.get(`http://localhost:3001/countries/${id}`)
             if(data) setActivities(data.Activities)
         } catch (error){
-            window.alert(error.message)
+            window.alert(error.response.data)
         }
     }
 

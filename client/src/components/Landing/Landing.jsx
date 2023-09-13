@@ -10,7 +10,6 @@ const Landing = ()=>{
 
     useEffect(()=>{
         dispatch(getCountries())
-        dispatch(getActivities())
     })
 
 return(

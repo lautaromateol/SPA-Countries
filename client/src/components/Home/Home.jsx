@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react'
-import {getCountries, filterCountries, orderCountries, searchCountries, findCountries} from '../../redux/actions'
+import {getCountries, filterCountries, orderCountries, searchCountries, findCountries, getActivities} from '../../redux/actions'
 import Card from "../Card/Card";
 import style from './Home.module.css'
 
@@ -68,6 +68,7 @@ const Home = ()=>{
 
 
     useEffect(()=>{
+        dispatch(getActivities())
         setItems([...countries].splice(0, 10))
     }, [countries, aux])
 

@@ -17,6 +17,8 @@ module.exports = async(req, res) =>{
                         attributes: []
                     }}
             })
+
+        if(!country) return res.status(404).send('No se encontro el pais')
         
         res.status(200).json(country)
         

@@ -39,19 +39,26 @@ const handleChange = (event)=>{
 }
 
 const handleSubmit = async(event)=>{
-    event.preventDefault()
-    if(!data.name || !data.difficulty || !data.season || !data.countries) setErrors('Falta informacion')
-    await axios.post('http://localhost:3001/activities', data)
-    event.target.reset()
-    setData({
-        name: '',
-        difficulty: 0,
-        duration: 0,
-        season: '',
-        countries: []
-    })
-    setErrors('')
-    setAux(true)
+    try{
+        
+        event.preventDefault()
+        await axios.post('http://localhost:3001/activities', data)
+        event.target.reset()
+        setData({
+            name: '',
+            difficulty: 0,
+            duration: 0,
+            season: '',
+            countries: []
+        })
+        setAux(true)
+        setErrors('')
+
+    } catch(error){
+
+        setErrors(error.response.data)
+
+    }
 }
 
 const handleDelete = (event)=>{
