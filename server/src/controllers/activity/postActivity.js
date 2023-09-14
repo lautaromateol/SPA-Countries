@@ -5,7 +5,7 @@ module.exports = async(req, res)=>{
     try {
         const {name, difficulty, duration, season, countries} = req.body
 
-        if(!name || !difficulty || !season || !countries) return res.status(400).send('Falta informacion')
+        if(!name || !difficulty || !season || !countries.length) return res.status(400).send('Falta informacion')
 
         let activity = await Activity.findOne({where : {name, difficulty, duration, season}})
         
