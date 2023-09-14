@@ -46,7 +46,7 @@ switch (action.type) {
     case 'SEARCH':
         return {
             ...state,
-            countries :  state.backup.filter(({name})=> name.toLowerCase().includes(action.payload))
+            countries :  state.backup.filter(({name})=> name.toLowerCase().includes(action.payload.toLowerCase()))
         }
     
     case 'GET_ACTIVITIES': 
